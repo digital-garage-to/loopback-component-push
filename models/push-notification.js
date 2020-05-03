@@ -37,20 +37,20 @@
  * @property {String} sound  The name of a sound file in the application bundle (iOS only).
  * @property {String} status Status of the notification (not supported yet).
  *
- * @class Notification
- * @header Notification
+ * @class PushNotification
+ * @header PushNotification
  */
-module.exports = function(Notification) {
+module.exports = function(PushNotification) {
   // Avoid exposure of internal properties such __data
-  Notification.hideInternalProperties = true;
+  PushNotification.hideInternalProperties = true;
 
-  Notification.observe('before save', function trip(ctx, next) {
+  PushNotification.observe('before save', function trip(ctx, next) {
     const notification = ctx.instance || ctx.data;
     notification.modified = notification.scheduledTime = new Date();
     next();
   });
 
-  Notification.prototype.getTimeToLiveInSecondsFromNow = function() {
+  PushNotification.prototype.getTimeToLiveInSecondsFromNow = function() {
     if (this.expirationInterval) {
       return this.expirationInterval;
     }
@@ -62,5 +62,5 @@ module.exports = function(Notification) {
     return undefined;
   };
 
-  return Notification;
+  return PushNotification;
 };

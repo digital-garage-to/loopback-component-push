@@ -13,29 +13,7 @@ SG.SetRootDir(__dirname);
  */
 const loopback = require('loopback');
 const PushConnector = require('./lib/push-connector');
+
+require('./lib/builtin-models')(loopback);
+
 exports = module.exports = PushConnector;
-
-/**
- * Export two model classes as properties
- */
-exports.Installation = require('./models').Installation;
-exports.Notification = require('./models').Notification;
-
-exports.createPushModel = function(options) {
-  options = options || {};
-
-  const pushDataSource = loopback.createDataSource({
-    connector: PushConnector,
-    installation: options.installation,
-    application: options.application,
-    notification: options.notification,
-    ttlInSeconds: options.ttlInSeconds,
-    checkPeriodInSeconds: options.checkPeriodInSeconds,
-  });
-
-  const PushModel = pushDataSource.createModel(options.name || 'Push', {},
-    {plural: options.plural || 'push'});
-  return PushModel;
-};
-
-exports.Push = exports.createPushModel();

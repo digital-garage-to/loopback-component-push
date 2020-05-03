@@ -9,6 +9,7 @@
       "type": "string"
     },
     "appVersion": "string",
+    "osVersion": "string",
     "badge": "number",
     "created": {
       "defaultFn": "now",

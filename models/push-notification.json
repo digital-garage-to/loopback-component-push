@@ -1,6 +1,6 @@
 {
-  "name": "Notification",
-  "plural": "Notifications",
+  "name": "PushNotification",
+  "plural": "PushNotifications",
   "base": "PersistedModel",
   "idInjection": true,
   "properties": {
